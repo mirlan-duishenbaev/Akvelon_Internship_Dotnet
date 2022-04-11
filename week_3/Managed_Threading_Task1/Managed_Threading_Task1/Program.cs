@@ -1,7 +1,7 @@
 ﻿using Managed_Threading_Task1;
 
 Thread dancer1, dancer2, dancer3;
-int trackNum = new();
+int dance = new();
 int count = 0;
 
 Console.WriteLine("\nDJ starts the music on!");
@@ -15,7 +15,7 @@ Thread music = new Thread(() =>
         Console.WriteLine("\nTrack #{0}", i+1);
         Console.WriteLine($"{(Managed_Threading_Task1.enums.Music)index} is playing!");
         count = i;
-        trackNum = index;
+        dance = index;
         Thread.Sleep(5000);
     }
 });
@@ -25,15 +25,15 @@ music.Start();
 while (music.IsAlive)
 {
     Thread.Sleep(1000);
-    dancer1 = new Thread(() => DanceFloor.AllAreDancing(trackNum))
+    dancer1 = new Thread(() => DanceFloor.AllAreDancing(dance))
     {
         Name = "John"
     };
-    dancer2 = new Thread(() => DanceFloor.AllAreDancing(trackNum))
+    dancer2 = new Thread(() => DanceFloor.AllAreDancing(dance))
     {
         Name = "Anna"
     };
-    dancer3 = new Thread(() => DanceFloor.AllAreDancing(trackNum))
+    dancer3 = new Thread(() => DanceFloor.AllAreDancing(dance))
     {
         Name = "Brad"
     };
