@@ -48,15 +48,7 @@ namespace Managed_Threading_Task2
                     webClient.DownloadFile(url, fileName);
                     Console.WriteLine("{0} | Thread {1} starts downloading image {2}",
                     DateTime.Now.ToString("hh:MM:ss"),
-                    Thread.CurrentThread.Name, fileName);
-                    Thread.CurrentThread.Join();
-
-                    if (!Thread.CurrentThread.IsAlive)
-                    {
-                        Console.WriteLine("{0} | Thread {1} finished downloading image {2}",
-                            DateTime.Now.ToString("hh:MM:ss"),
-                            Thread.CurrentThread.Name, fileName);
-                    }
+                    Thread.CurrentThread.ManagedThreadId, fileName);
                 }
             }
         }
