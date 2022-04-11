@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Managed_Threading_Task2
 {
-    internal class Image
+    public class Image
     {
         public string? AlbumId { get; set; }
         public string? Id { get; set; }
@@ -43,13 +43,11 @@ namespace Managed_Threading_Task2
         {
             lock (locker)
             {
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.DownloadFile(url, fileName);
-                    Console.WriteLine("{0} | Thread {1} starts downloading image {2}",
-                    DateTime.Now.ToString("hh:MM:ss"),
-                    Thread.CurrentThread.ManagedThreadId, fileName);
-                }
+                using WebClient webClient = new WebClient();
+                webClient.DownloadFile(url, fileName);
+                Console.WriteLine("{0} | Thread {1} starts downloading image {2}",
+                DateTime.Now.ToString("hh:MM:ss"),
+                Environment.CurrentManagedThreadId, fileName);
             }
         }
     }
