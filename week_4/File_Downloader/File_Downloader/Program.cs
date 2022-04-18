@@ -6,8 +6,8 @@ namespace File_Downloader
     {
         static void Main(string[] args)
         {
-            string url = "https://images.wallpaperscraft.ru/image/single/skala_derevia_priroda_275251_1920x1080.jpg";
-            var result = Downloader.Download(url, @"c:\temp\", 2);
+            string url = "https://images.wallpaperscraft.ru/image/single/teplohod_more_gory_274897_1920x1080.jpg";
+            var result = Downloader.Download(url, @"c:\temp\", 3);
 
             Console.WriteLine($"Location: {result.FilePath}");
             Console.WriteLine($"Size: {result.Size}bytes");

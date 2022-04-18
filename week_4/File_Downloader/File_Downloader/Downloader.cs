@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShellProgressBar;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace File_Downloader
             }
 
             #region Get file size  
-            WebRequest webRequest = HttpWebRequest.Create(fileUrl);
+            WebRequest webRequest = WebRequest.Create(fileUrl);
             webRequest.Method = "HEAD";
             long responseLength;
             using (WebResponse webResponse = webRequest.GetResponse())
@@ -63,6 +64,7 @@ namespace File_Downloader
 
                 #region Calculate ranges  
                 List<Range> readRanges = new List<Range>();
+
                 for (int chunk = 0; chunk < numberOfParallelDownloads - 1; chunk++)
                 {
                     var range = new Range()
@@ -72,7 +74,6 @@ namespace File_Downloader
                     };
                     readRanges.Add(range);
                 }
-
 
                 readRanges.Add(new Range()
                 {
@@ -85,7 +86,6 @@ namespace File_Downloader
                 DateTime startTime = DateTime.Now;
 
                 #region Parallel download  
-
                 int index = 0;
                 Parallel.ForEach(readRanges, new ParallelOptions() { MaxDegreeOfParallelism = numberOfParallelDownloads }, readRange =>
                 {
@@ -119,7 +119,6 @@ namespace File_Downloader
                     File.Delete(tempFile.Value);
                 }
                 #endregion
-
 
                 return result;
             }
