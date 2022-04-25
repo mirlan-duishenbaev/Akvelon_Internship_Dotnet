@@ -19,9 +19,9 @@ namespace File_Downloader
 
         }
         public static DownloadResult Download
-            (String fileUrl, 
-            String destinationFolderPath, 
-            int numberOfParallelDownloads = 0, 
+            (String fileUrl,
+            String destinationFolderPath,
+            int numberOfParallelDownloads = 0,
             bool validateSSL = false)
         {
             if (!validateSSL)
@@ -87,23 +87,26 @@ namespace File_Downloader
 
                 #region Parallel download  
                 int index = 0;
-                Parallel.ForEach(readRanges, new ParallelOptions() { MaxDegreeOfParallelism = numberOfParallelDownloads }, readRange =>
-                {
-                    HttpWebRequest httpWebRequest = HttpWebRequest.Create(fileUrl) as HttpWebRequest;
-                    httpWebRequest.Method = "GET";
-                    httpWebRequest.AddRange(readRange.Start, readRange.End);
-                    using (HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse)
-                    {
-                        String tempFilePath = Path.GetTempFileName();
-                        using (var fileStream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write, FileShare.Write))
-                        {
-                            httpWebResponse.GetResponseStream().CopyTo(fileStream);
-                            tempFilesDictionary.TryAdd((int)index, tempFilePath);
-                        }
-                    }
-                    index++;
 
-                });
+                
+                Enumerable.Range(1, readRanges.Count)
+                    .AsParallel()
+                    .ForAll(_ =>
+                    {
+                        HttpWebRequest httpWebRequest = HttpWebRequest.Create(fileUrl) as HttpWebRequest;
+                        httpWebRequest.Method = "GET";
+                        using (HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse)
+                        {
+                            string tempFilePath = Path.GetTempFileName();
+                            using (var fileStream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write, FileShare.Write))
+                            {
+                                Console.WriteLine("Thread {0} is performing the task...", Thread.CurrentThread.ManagedThreadId);
+                                httpWebResponse.GetResponseStream().CopyTo(fileStream);
+                                tempFilesDictionary.TryAdd((int)index, tempFilePath);
+                            }
+                        }
+                        index++;
+                    });
 
                 result.ParallelDownloads = index;
 

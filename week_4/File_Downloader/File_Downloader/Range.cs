@@ -8,6 +8,7 @@ namespace File_Downloader
 {
     internal class Range
     {
+        public int Index { get; set; }
         public long Start { get; set; }
         public long End { get; set; }
     }

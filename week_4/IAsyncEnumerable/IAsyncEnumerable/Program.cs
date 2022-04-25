@@ -31,7 +31,6 @@ namespace GitHubActivityReport
         public string? CreatedAt { get; set; }
     }
 
-
     class Program
     {
         private const string PagedIssueQuery =
@@ -74,7 +73,7 @@ namespace GitHubActivityReport
             // Replace the 3rd parameter to the following code with your GitHub access token.
             var key = GetEnvVariable("GitHubKey",
             "You must store your GitHub key in the 'GitHubKey' environment variable",
-            "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");
+            "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");
 
             var client = new GitHubClient(new Octokit.ProductHeaderValue("IssueQueryDemo"))
             {
@@ -92,7 +91,7 @@ namespace GitHubActivityReport
             {
                 var results = RunPagedQueryAsync(client, PagedIssueQuery, "docs",
                     cancellationSource.Token, progressReporter);
-                await foreach(var result in results)
+                await foreach (var result in results)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Title: {0}", result.Title);
@@ -121,7 +120,6 @@ namespace GitHubActivityReport
             bool hasMorePages = true;
             int pagesReturned = 0;
             int issuesReturned = 0;
-            List<Issue> issuesList = new List<Issue>();
 
             // Stop with 10 pages, because these are large repos:
             while (hasMorePages && (pagesReturned++ < 10))
@@ -146,7 +144,7 @@ namespace GitHubActivityReport
                 // </SnippetProcessPage>
 
                 dynamic tempList = JValue.Parse(finalResults.ToString());
-                foreach(var item in tempList)
+                foreach (var item in tempList)
                 {
                     Issue issue = new Issue()
                     {
@@ -154,10 +152,8 @@ namespace GitHubActivityReport
                         Number = item.number,
                         CreatedAt = item.createdAt
                     };
-
                     yield return issue;
                 }
-                
             }
             JObject issues(JObject result) => (JObject)result["data"]["repository"]["issues"];
             JObject pageInfo(JObject result) => (JObject)issues(result)["pageInfo"];
