@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Traverse_Tree
 {
-    internal class Tree<T>
+    internal class Student
     {
-        public Tree<T>? Left;
-        public Tree<T>? Right;
-        public T? Data;
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

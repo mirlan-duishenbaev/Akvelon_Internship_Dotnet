@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subject_Area_Modelling", "Subject_Area_Modelling.csproj", "{96558FCB-5563-4088-AECA-FCD7F4BBF709}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96558FCB-5563-4088-AECA-FCD7F4BBF709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96558FCB-5563-4088-AECA-FCD7F4BBF709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96558FCB-5563-4088-AECA-FCD7F4BBF709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96558FCB-5563-4088-AECA-FCD7F4BBF709}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0000C0DB-377C-4272-8B5E-7F37B1DBF797}
+	EndGlobalSection
+EndGlobal
